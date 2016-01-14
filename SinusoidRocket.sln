@@ -1,0 +1,23 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{98B6A9BD-6B0C-5700-12BA-8D420976BBC6}") = "SinusoidRocket", "Assembly-CSharp.csproj", "{519DA238-00A5-F771-3B66-0AD2A3B3D807}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{519DA238-00A5-F771-3B66-0AD2A3B3D807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{519DA238-00A5-F771-3B66-0AD2A3B3D807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{519DA238-00A5-F771-3B66-0AD2A3B3D807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{519DA238-00A5-F771-3B66-0AD2A3B3D807}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
