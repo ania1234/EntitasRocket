@@ -9,9 +9,4 @@ public class TextureTest : MonoBehaviour {
         line = (LineRenderer)gameObject.GetComponent<Renderer>();
         line.material.mainTextureScale = new Vector2(2f, 1f);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
 }

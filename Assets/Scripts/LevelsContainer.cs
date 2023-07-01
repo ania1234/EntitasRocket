@@ -12,16 +12,6 @@ public class LevelsContainer : MonoBehaviour {
     public static int width;
     static char[,] levelMap;
     private static string[] levels = new string[8];
-    
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public static void LoadLevel(int levelNumber)
     {
