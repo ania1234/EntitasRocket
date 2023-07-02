@@ -28,30 +28,24 @@ public class GameScript : MonoBehaviour {
     float size = 1.0f;
     public float speed;
 
-    private const float MaxA = 3.0f;
-    private const float MinA = -3.0f;
-    private const float MaxB = 2.0f;
-    private const float MinB = 0.2f;
-    private const float StepA = 0.01f;
-    private const float StepB = 0.01f;
-    private const float maxSpeed = 15.0f;
-    private const float minSpeed = 1.0f;
-    private const float maxHealth = 3.0f;
-    private const float minHealth = 0.0f;
-    private const float maxSize = 3.0f;
-    private const float minSize = 0.5f;
-    private const float maxAmmo = 3.0f;
-    private const float minAmmo = 0.5f;
+    private const float MAX_A = 3.0f;
+    private const float MIN_A = -3.0f;
+    private const float MAX_B = 2.0f;
+    private const float MIN_B = 0.2f;
+    private const float MAX_SPEED = 15.0f;
+    private const float MIN_SPEED = 1.0f;
+    private const float MAX_HEALTH = 3.0f;
+    private const float MIN_HEALTH = 0.0f;
+    private const float MAX_SIZE = 3.0f;
+    private const float MIN_SIZE = 0.5f;
+    private const float MAX_AMMO = 3.0f;
+    private const float MIN_AMMO = 0.5f;
     private Touch touch;
 
     float duration = 0;
     float sineTimeToSubstract = 0;
-    float sineTimeToSubstract2 = 0;
 
     int currentWave = 0;
-
-    int lastCount;
-    int framesSkipped = 0;
 	// Use this for initialization
 	void Start () {
         Background.gameObject.GetComponent<Animator>().enabled = true;
@@ -60,7 +54,6 @@ public class GameScript : MonoBehaviour {
         PersistingScript.persistingScript.score.ResetScore();
         UI.InitializeDisplay();
         sineTimeToSubstract = Time.time;
-        lastCount = sine.vertexCount - 11;
         LevelsContainer.LoadLevel(PersistingScript.persistingScript.currentLevelNumber);
 	}
 
@@ -139,27 +132,27 @@ public class GameScript : MonoBehaviour {
                     var distanceB = this.touch.position.x - finger1.position.x;
                     if (Mathf.Abs(distanceA) >= Mathf.Abs(distanceB))
                     {
-                        if (Mathf.Sign(distanceA) > 0 && A < MaxA)
+                        if (Mathf.Sign(distanceA) > 0 && A < MAX_A)
                         {
-                            A = A + distanceA*StepA;
+                            A = A + distanceA*Time.deltaTime;
                         }
-                        if (Mathf.Sign(distanceA) < 0 && A > MinA)
+                        if (Mathf.Sign(distanceA) < 0 && A > MIN_A)
                         {
-                            A = A + distanceA*StepA;
+                            A = A + distanceA*Time.deltaTime;
                         }
 
                     }
                     else
                     {
-                        if (Mathf.Sign(distanceB) > 0 && B + distanceB*StepB < MaxB)
+                        if (Mathf.Sign(distanceB) > 0 && B + distanceB*Time.deltaTime < MAX_B)
                         {
-                            B = B + distanceB*StepB;
-                            C = Time.time * distanceB*StepB + C;
+                            B = B + distanceB *Time.deltaTime;
+                            C = Time.time * distanceB * Time.deltaTime + C;
                         }
-                        if (Mathf.Sign(distanceB) < 0 && B > MinA)
+                        if (Mathf.Sign(distanceB) < 0 && B > MIN_A)
                         {
-                            B = B + distanceB*StepB;
-                            C = Time.time * distanceB*StepB + C;
+                            B = B + distanceB * Time.deltaTime;
+                            C = Time.time * distanceB * Time.deltaTime + C;
                         }
                     }
 
@@ -178,32 +171,32 @@ public class GameScript : MonoBehaviour {
     {
         if (Input.GetKey(KeyCode.W))
         {
-            if (A < MaxA)
+            if (A < MAX_A)
             {
-                A = A + StepA;
+                A = A + Time.deltaTime;
             }
         }
         if (Input.GetKey(KeyCode.S))
         {
-            if (A > MinA)
+            if (A > MIN_A)
             {
-                A = A - StepA;
+                A = A - Time.deltaTime;
             }
         }
         if (Input.GetKey(KeyCode.A))
         {
-            if (B > MinB)
+            if (B > MIN_B)
             {
-                B = B - StepB;
-                C = -Time.time * StepB + C;
+                B = B - Time.deltaTime;
+                C = -Time.time * Time.deltaTime + C;
             }
         }
         if (Input.GetKey(KeyCode.D))
         {
-            if (B < MaxB)
+            if (B < MAX_B)
             {
-                B = B + StepB;
-                C = Time.time * StepB + C;
+                B = B + Time.deltaTime;
+                C = Time.time * Time.deltaTime + C;
             }
         }
         if (Input.GetKey(KeyCode.Space))
@@ -224,15 +217,7 @@ public class GameScript : MonoBehaviour {
 
     private void AnimateSine()
     {
-        if (sine.points[sine.points.Count/4].x-Time.time < 0)
-        {
-            lastCount++;
-            sine.points.RemoveAt(0);
-            sine.points.Add(new Vector3(((float)lastCount) / 4.0f + sineTimeToSubstract , 0));
-            framesSkipped = 0;
-        }
-            
-        sine.lineRenderer.SetPositions(sine.points.Select((x) => Vector3.right * (x.x - Time.time) + Vector3.up * A * Mathf.Sin(B * (x.x) - C)).ToArray());
+        sine.UpdatePoints(A, B, C);
     }
 
 
@@ -242,7 +227,7 @@ public class GameScript : MonoBehaviour {
         {
             hit = true;
             DecreaseLife();
-            if (PersistingScript.persistingScript.score.life == minHealth)
+            if (PersistingScript.persistingScript.score.life == MIN_HEALTH)
             {
                 SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
             }
@@ -263,7 +248,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseSpeed()
     {
-        if (speed < maxSpeed)
+        if (speed < MAX_SPEED)
         {
             float oldSpeed = speed;
             speed+=2;
@@ -284,7 +269,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator DecreaseSpeed()
     {
-        if (speed > minSpeed)
+        if (speed > MIN_SPEED)
         {
             speed-=5;
             //change background animation speed
@@ -296,7 +281,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseAmmo()
     {
-        if (PersistingScript.persistingScript.score.ammo < maxAmmo)
+        if (PersistingScript.persistingScript.score.ammo < MAX_AMMO)
         {
             PersistingScript.persistingScript.score.ammo++;
             UI.UpdateAmmo();
@@ -313,7 +298,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseSize()
     {
-        if (size < maxSize)
+        if (size < MAX_SIZE)
         {
             size += 0.5f;
             gameObject.transform.localScale = new Vector3(0.7f * size, 0.7f * size);
@@ -323,7 +308,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator DecreaseSize()
     {
-        if (size > minSize)
+        if (size > MIN_SIZE)
         {
             size -= 0.5f;
             gameObject.transform.localScale = new Vector3(0.7f * size, 0.7f * size);
@@ -333,7 +318,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator Shoot()
     {
-        if (!shooting && PersistingScript.persistingScript.score.ammo > minAmmo)
+        if (!shooting && PersistingScript.persistingScript.score.ammo > MIN_AMMO)
         {
             shooting = true;
             Rigidbody2D shootAsteroid = (Rigidbody2D)Instantiate(Constants.constants.bullet, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0)));
@@ -348,7 +333,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseLife()
     {
-        if (PersistingScript.persistingScript.score.life < maxHealth)
+        if (PersistingScript.persistingScript.score.life < MAX_HEALTH)
         {
             PersistingScript.persistingScript.score.life++;
         }
@@ -362,12 +347,12 @@ public class GameScript : MonoBehaviour {
         if (!hit)
         {
             hit = true;
-            if (PersistingScript.persistingScript.score.life > minHealth)
+            if (PersistingScript.persistingScript.score.life > MIN_HEALTH)
             {
                 PersistingScript.persistingScript.score.life--;
             }
             UI.UpdateLife();
-            if (PersistingScript.persistingScript.score.life == minHealth)
+            if (PersistingScript.persistingScript.score.life == MIN_HEALTH)
             {
                 SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
             }

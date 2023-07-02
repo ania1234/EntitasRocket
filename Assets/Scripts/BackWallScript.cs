@@ -21,14 +21,14 @@ public class BackWallScript : MonoBehaviour {
         {
             case Constants.Tags.Player:
 
-                    if (PersistingScript.persistingScript.maxLevelNumber == PersistingScript.persistingScript.currentLevelNumber)
-                    {
-                        PersistingScript.persistingScript.maxLevelNumber = Mathf.Min(PersistingScript.persistingScript.maxLevelNumber + 1, 8);
-                    }
-                    PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1] =
-                    Mathf.Max(PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1], PersistingScript.persistingScript.score.CalculateScore());
-                    PersistingScript.persistingScript.Save();
-                    SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
+                if (PersistingScript.persistingScript.maxLevelNumber == PersistingScript.persistingScript.currentLevelNumber)
+                {
+                    PersistingScript.persistingScript.maxLevelNumber = Mathf.Min(PersistingScript.persistingScript.maxLevelNumber + 1, 8);
+                }
+                PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1] =
+                Mathf.Max(PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1], PersistingScript.persistingScript.score.CalculateScore());
+                PersistingScript.persistingScript.Save();
+                SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
                 break;
             case Constants.Tags.Gold:
                 if (PersistingScript.persistingScript.currentLevelNumber == Constants.LevelsNumber)
