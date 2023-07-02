@@ -13,5 +13,7 @@ public class SpawnPlayerSystem : IInitializeSystem
     {
         var e = _contexts.game.CreateEntity();
         e.AddHealth(100);
+        e.AddAsset("Player", false);
+        e.AddPosition(new UnityEngine.Vector3(0, 0, 0));
     }
 }
