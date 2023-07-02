@@ -1,4 +1,5 @@
 using Entitas;
+using UnityEngine;
 
 public class SpawnPlayerSystem : IInitializeSystem
 {
@@ -15,5 +16,6 @@ public class SpawnPlayerSystem : IInitializeSystem
         e.AddHealth(100);
         e.AddAsset("Player", false);
         e.AddPosition(new UnityEngine.Vector3(0, 0, 0));
+        e.AddSineMovement(1, 1, 0, Time.time);
     }
 }

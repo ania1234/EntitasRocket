@@ -14,9 +14,10 @@ public static class GameComponentsLookup {
     public const int Health = 3;
     public const int Position = 4;
     public const int PositionListener = 5;
-    public const int View = 6;
+    public const int SineMovement = 6;
+    public const int View = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -25,6 +26,7 @@ public static class GameComponentsLookup {
         "Health",
         "Position",
         "PositionListener",
+        "SineMovement",
         "View"
     };
 
@@ -35,6 +37,7 @@ public static class GameComponentsLookup {
         typeof(HealthComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
+        typeof(SineMovementComponent),
         typeof(ViewComponent)
     };
 }

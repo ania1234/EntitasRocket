@@ -19,6 +19,10 @@ public class RootSystem : Feature
         Add(new ProcessAxisInputSystem(contexts));
         //Add(new ProcessShootingSystem(contexts));
 
+        //process movement
+        Add(new ProcessSineMovementSystem(contexts));
+        //Add(new ProcessLinearMovementSystem(contexts));
+
         //process collisions
 
         //process events (generated)

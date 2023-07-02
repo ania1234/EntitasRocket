@@ -28,18 +28,18 @@ public class GameScript : MonoBehaviour {
     float size = 1.0f;
     public float speed;
 
-    private const float MAX_A = 3.0f;
-    private const float MIN_A = -3.0f;
-    private const float MAX_B = 2.0f;
-    private const float MIN_B = 0.2f;
-    private const float MAX_SPEED = 15.0f;
-    private const float MIN_SPEED = 1.0f;
-    private const float MAX_HEALTH = 3.0f;
-    private const float MIN_HEALTH = 0.0f;
-    private const float MAX_SIZE = 3.0f;
-    private const float MIN_SIZE = 0.5f;
-    private const float MAX_AMMO = 3.0f;
-    private const float MIN_AMMO = 0.5f;
+    public const float MAX_A = 3.0f;
+    public const float MIN_A = -3.0f;
+    public const float MAX_B = 2.0f;
+    public const float MIN_B = 0.2f;
+    public const float MAX_SPEED = 15.0f;
+    public const float MIN_SPEED = 1.0f;
+    public const float MAX_HEALTH = 3.0f;
+    public const float MIN_HEALTH = 0.0f;
+    public const float MAX_SIZE = 3.0f;
+    public const float MIN_SIZE = 0.5f;
+    public const float MAX_AMMO = 3.0f;
+    public const float MIN_AMMO = 0.5f;
     private Touch touch;
 
     float duration = 0;
