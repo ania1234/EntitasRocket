@@ -14,6 +14,7 @@ public class ProcessShootingInputSystem : ReactiveSystem<InputEntity>
         var player = _contexts.game.GetEntityWithId(Constants.PLAYER_ID);
         if (player.ammo.value > 0)
         {
+            player.ReplaceAmmo(player.ammo.value - 1);
             Debug.LogError("Shoot");
         }
     }

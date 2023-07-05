@@ -10,6 +10,6 @@ public class AddSpeedInputCollisionHandler : PlayerCollisionHandler
     protected override void OnCollisionLogic(GameEntity otherEntity)
     {
         var speedInput = Contexts.sharedInstance.input.CreateEntity();
-        speedInput.AddScaleInput(_speedChange);
+        speedInput.AddSpeedInput(_speedChange);
     }
 }

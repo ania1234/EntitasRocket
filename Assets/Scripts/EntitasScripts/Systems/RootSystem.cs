@@ -9,6 +9,10 @@ public class RootSystem : Feature
         //generate views
         Add(new AddViewSystem(contexts));
 
+        //process movement
+        Add(new ProcessSineMovementSystem(contexts));
+        Add(new ProcessLinearMovementSystem(contexts));
+
         //gather input
         Add(new GatherAxisInputSystem(contexts));
         Add(new GatherShootingInputSystem(contexts));
@@ -19,10 +23,6 @@ public class RootSystem : Feature
         //Those two inputs are gathered from physics2D collisions, rather than user input, but still seemed better suited for Input category
         Add(new ProcessSpeedInputSystem(contexts));
         Add(new ProcessScaleInputSystem(contexts));
-
-        //process movement
-        Add(new ProcessSineMovementSystem(contexts));
-        Add(new ProcessLinearMovementSystem(contexts));
 
         //process events (generated)
         Add(new GameEventSystems(contexts));

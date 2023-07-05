@@ -33,7 +33,7 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener,
 
     public void OnScale(GameEntity entity, float scale)
     {
-        transform.localScale = scale * Vector3.one;
+        transform.localScale = scale * Vector3.one*Constants.SCALE_MODIFIER;
     }
 }
 

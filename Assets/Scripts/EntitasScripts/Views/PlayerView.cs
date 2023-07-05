@@ -10,6 +10,9 @@ public class PlayerView : View
 
     private void Update()
     {
-        _sine.UpdatePoints(_linkedEntity.sineMovement.A, _linkedEntity.sineMovement.B, _linkedEntity.sineMovement.C);
+        if (_linkedEntity.hasSineMovement)
+        {
+            _sine.UpdatePoints(_linkedEntity.sineMovement.A, _linkedEntity.sineMovement.B, _linkedEntity.sineMovement.C);
+        }
     }
 }

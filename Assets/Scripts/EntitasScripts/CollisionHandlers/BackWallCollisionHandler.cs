@@ -18,7 +18,6 @@ public class BackWallCollisionHandler : MonoBehaviour
                 }
                 if (collision.collider.CompareTag(Constants.Tags.Gold))
                 {
-                    Debug.LogError("LOOSE");
                     Contexts.sharedInstance.gameState.CreateEntity().isLooseGameState = true;
                 }
                 otherEntity.isDestroyed = true;

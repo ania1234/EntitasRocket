@@ -23,7 +23,7 @@ public class ProcessScaleInputSystem : ReactiveSystem<InputEntity>
 
     protected override bool Filter(InputEntity entity)
     {
-        return entity.hasSpeedInput;
+        return entity.hasScaleInput;
     }
 
     protected override ICollector<InputEntity> GetTrigger(IContext<InputEntity> context)

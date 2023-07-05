@@ -26,6 +26,8 @@ public class Constants : MonoBehaviour {
 
     public const string PLAYER_ID = "Player";
 
+    public const float SCALE_MODIFIER = 0.7f;
+
     public static Constants constants;
 
     public Dictionary<char, AsteroidMappingData> AsteroidMapping = new Dictionary<char, AsteroidMappingData>();
