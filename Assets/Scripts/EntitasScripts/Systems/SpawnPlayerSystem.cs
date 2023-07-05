@@ -18,6 +18,7 @@ public class SpawnPlayerSystem : IInitializeSystem
         e.AddPosition(new UnityEngine.Vector3(0, 0, 0));
         e.AddSineMovement(1, 1, 0, Time.time);
         e.AddId(Constants.PLAYER_ID);
+        e.AddAmmo(0);
         e.AddScore(0);
     }
 }

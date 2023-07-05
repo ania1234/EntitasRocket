@@ -2,7 +2,7 @@ using Entitas;
 using Entitas.Unity;
 using UnityEngine;
 
-public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener
+public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener, IScaleListener
 {
     protected GameEntity _linkedEntity;
 
@@ -12,6 +12,7 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener
         _linkedEntity = (GameEntity)entity;
         _linkedEntity.AddPositionListener(this);
         _linkedEntity.AddDestroyedListener(this);
+        _linkedEntity.AddScaleListener(this);
 
         var pos = _linkedEntity.position.value;
         transform.localPosition = new Vector3(pos.x, pos.y);
@@ -28,6 +29,11 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener
     {
         gameObject.Unlink();
         Destroy(gameObject);
+    }
+
+    public void OnScale(GameEntity entity, float scale)
+    {
+        transform.localScale = scale * Vector3.one;
     }
 }
 

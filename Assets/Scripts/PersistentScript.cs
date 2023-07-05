@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class PersistentScript : MonoBehaviour {
 
@@ -16,9 +17,14 @@ public class PersistentScript : MonoBehaviour {
 
     public GameScript rocket;
     public Score score;
-	
-	// Update is called once per frame
-	void Awake () {
+
+    internal void NoteMaxLevel()
+    {
+        maxLevelNumber = Mathf.Min(maxLevelNumber + 1, Constants.MAX_LEVELS);
+    }
+
+    // Update is called once per frame
+    void Awake () {
         if (instance == null)
         {
             score = new Score();
@@ -30,6 +36,21 @@ public class PersistentScript : MonoBehaviour {
             GameObject.Destroy(this.gameObject);
         }
 	}
+
+    internal void LoadLooseScene()
+    {
+        SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
+    }
+
+    internal void LoadWinScene()
+    {
+        SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
+    }
+
+    internal void NoteHighScore()
+    {
+        highScores[currentLevelNumber - 1] = Mathf.Max(highScores[currentLevelNumber - 1], score.CalculateScore());
+    }
 
     public void Save()
     {

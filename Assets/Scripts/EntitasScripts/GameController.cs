@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        LevelsContainer.LoadLevel(1);
+        LevelsContainer.LoadLevel(PersistentScript.instance!=null? PersistentScript.instance.currentLevelNumber : 1);
         var contexts = Contexts.sharedInstance;
 
         _rootSystem = new RootSystem(contexts);

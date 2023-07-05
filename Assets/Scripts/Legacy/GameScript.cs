@@ -212,7 +212,7 @@ public class GameScript : MonoBehaviour {
         {
             hit = true;
             DecreaseLife();
-            if (PersistentScript.instance.score.life == MIN_HEALTH)
+            if (PersistentScript.instance.score.Life == MIN_HEALTH)
             {
                 SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
             }
@@ -226,7 +226,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator UpdateScore()
     {
-        PersistentScript.instance.score.score++;
+        //PersistentScript.instance.score.Score++;
         UI.UpdateScore();
         yield return null;
     }
@@ -266,9 +266,9 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseAmmo()
     {
-        if (PersistentScript.instance.score.ammo < MAX_AMMO)
+        if (PersistentScript.instance.score.Ammo < MAX_AMMO)
         {
-            PersistentScript.instance.score.ammo++;
+            //PersistentScript.instance.score.ammo++;
             UI.UpdateAmmo();
         }
         yield return null;
@@ -276,7 +276,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator DecreaseAmmo()
     {
-        PersistentScript.instance.score.ammo--;
+        //PersistentScript.instance.score.ammo--;
         UI.UpdateAmmo();
         yield return null;
     }
@@ -303,7 +303,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator Shoot()
     {
-        if (!shooting && PersistentScript.instance.score.ammo > MIN_AMMO)
+        if (!shooting && PersistentScript.instance.score.Ammo > MIN_AMMO)
         {
             shooting = true;
             //Rigidbody2D shootAsteroid = (Rigidbody2D)Instantiate(Constants.constants.bullet, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0)));
@@ -318,9 +318,9 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseLife()
     {
-        if (PersistentScript.instance.score.life < MAX_HEALTH)
+        if (PersistentScript.instance.score.Life < MAX_HEALTH)
         {
-            PersistentScript.instance.score.life++;
+            //PersistentScript.instance.score.life++;
         }
         UI.UpdateLife();
 
@@ -332,12 +332,12 @@ public class GameScript : MonoBehaviour {
         if (!hit)
         {
             hit = true;
-            if (PersistentScript.instance.score.life > MIN_HEALTH)
+            if (PersistentScript.instance.score.Life > MIN_HEALTH)
             {
-                PersistentScript.instance.score.life--;
+                //PersistentScript.instance.score.life--;
             }
             UI.UpdateLife();
-            if (PersistentScript.instance.score.life == MIN_HEALTH)
+            if (PersistentScript.instance.score.Life == MIN_HEALTH)
             {
                 SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
             }
@@ -407,7 +407,7 @@ public class GameScript : MonoBehaviour {
     {
         if (tag == Constants.Tags.Gold)
         {
-            PersistentScript.instance.score.gold++;
+            //PersistentScript.instance.score.gold++;
         }
     }
 }

@@ -1,24 +1,51 @@
 using Entitas;
 using System.Collections.Generic;
 
-public class ProcessWinSystem : ReactiveSystem<GameEntity>
+public class ProcessWinSystem : ReactiveSystem<GameStateEntity>
 {
-    public ProcessWinSystem(Contexts contexts):base(contexts.game)
+    private Contexts _contexts;
+    readonly List<Entity> _buffer = new List<Entity>();
+    public ProcessWinSystem(Contexts contexts):base(contexts.gameState)
+    {
+        _contexts = contexts;
+    }
+    protected override void Execute(List<GameStateEntity> entities)
     {
 
-    }
-    protected override void Execute(List<GameEntity> entities)
-    {
-        throw new System.NotImplementedException();
+        if (PersistentScript.instance != null)
+        {
+            PersistentScript.instance.NoteMaxLevel();
+            PersistentScript.instance.NoteHighScore();
+            PersistentScript.instance.Save();
+        }
+        var allGameEntities = _contexts.game.GetEntities();
+        foreach (var e in allGameEntities)
+        {
+            e.Destroy();
+        }
+        var allInputEntities = _contexts.input.GetEntities();
+        foreach (var e in allInputEntities)
+        {
+            e.Destroy();
+        }
+        var allGameStateEntities = _contexts.gameState.GetEntities();
+        foreach (var e in allGameStateEntities)
+        {
+            e.Destroy();
+        }
+        if (PersistentScript.instance != null)
+        {
+            PersistentScript.instance.LoadWinScene();
+        }
     }
 
-    protected override bool Filter(GameEntity entity)
+    protected override bool Filter(GameStateEntity entity)
     {
-        throw new System.NotImplementedException();
+        return entity.isWinGameState;
     }
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+    protected override ICollector<GameStateEntity> GetTrigger(IContext<GameStateEntity> context)
     {
-        throw new System.NotImplementedException();
+        return context.CreateCollector<GameStateEntity>(GameStateMatcher.WinGameState);
     }
 }

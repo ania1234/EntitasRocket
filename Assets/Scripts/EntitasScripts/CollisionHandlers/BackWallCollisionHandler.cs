@@ -13,23 +13,13 @@ public class BackWallCollisionHandler : MonoBehaviour
                 {
                     if (otherEntity.id.id == Constants.PLAYER_ID)
                     {
-                        if (PersistentScript.instance != null)
-                        {
-                            if (PersistentScript.instance.maxLevelNumber == PersistentScript.instance.currentLevelNumber)
-                            {
-                                PersistentScript.instance.maxLevelNumber = Mathf.Min(PersistentScript.instance.maxLevelNumber + 1, Constants.MAX_LEVELS);
-                            }
-                            PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber - 1] =
-                            Mathf.Max(PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber - 1], PersistentScript.instance.score.CalculateScore());
-                            PersistentScript.instance.Save();
-                        }
-                        SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
-                        return;
+                        Contexts.sharedInstance.gameState.CreateEntity().isWinGameState = true;
                     }
-                    if(otherEntity.id.id == Constants.Tags.Gold)
-                    {
-                        SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
-                    }
+                }
+                if (collision.collider.CompareTag(Constants.Tags.Gold))
+                {
+                    Debug.LogError("LOOSE");
+                    Contexts.sharedInstance.gameState.CreateEntity().isLooseGameState = true;
                 }
                 otherEntity.isDestroyed = true;
             }

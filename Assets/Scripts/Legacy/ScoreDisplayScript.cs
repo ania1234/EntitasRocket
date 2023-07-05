@@ -12,10 +12,10 @@ public class ScoreDisplayScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        MainScore.text = PersistentScript.instance.score.score.ToString();
-        HealthBonus.text = "+ " + PersistentScript.instance.score.multiplyLife.ToString() + " x " + PersistentScript.instance.score.life.ToString();
-        ShootBonus.text = "+ " + PersistentScript.instance.score.multiplyAmmo.ToString() + " x " + PersistentScript.instance.score.ammo.ToString();
-        GoldBonus.text = "+ " + PersistentScript.instance.score.multiplyGold.ToString() + " x " + PersistentScript.instance.score.gold.ToString();
+        MainScore.text = PersistentScript.instance.score.ScorePoints.ToString();
+        HealthBonus.text = "+ " + PersistentScript.instance.score.multiplyLife.ToString() + " x " + PersistentScript.instance.score.Life.ToString();
+        ShootBonus.text = "+ " + PersistentScript.instance.score.multiplyAmmo.ToString() + " x " + PersistentScript.instance.score.Ammo.ToString();
+        GoldBonus.text = "+ " + PersistentScript.instance.score.multiplyGold.ToString() + " x " + PersistentScript.instance.score.Gold.ToString();
 
         Summary.text = "= " + PersistentScript.instance.score.CalculateScore().ToString();
 
