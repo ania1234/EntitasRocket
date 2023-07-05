@@ -15,7 +15,7 @@ public class ProcessLinearMovementSystem : IExecuteSystem
     {
         foreach(var movableEntity in _movableEntities)
         {
-            movableEntity.ReplacePosition(new Vector3(movableEntity.position.value.x - _contexts.game.globalSpeed.globalSpeed*Time.deltaTime, movableEntity.position.value.y, movableEntity.position.value.z));
+            movableEntity.ReplacePosition(new Vector3(movableEntity.position.value.x + movableEntity.linearSpeedMovement.speedMultiplier* _contexts.game.globalSpeed.globalSpeed*Time.deltaTime, movableEntity.position.value.y, movableEntity.position.value.z));
         }
     }
 }

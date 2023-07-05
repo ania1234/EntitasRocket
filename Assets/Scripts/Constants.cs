@@ -23,6 +23,7 @@ public class Constants : MonoBehaviour {
     public const int MAX_AMMO = 3;
     public const int MIN_AMMO = 0;
     public const float FARTHEST_X_POSITION = 14.0f;
+    public static readonly Vector3 BULLET_OFFSET = new Vector3(1.7f, 0, 0);
 
     public const string PLAYER_ID = "Player";
 

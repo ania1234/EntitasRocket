@@ -15,7 +15,10 @@ public class ProcessShootingInputSystem : ReactiveSystem<InputEntity>
         if (player.ammo.value > 0)
         {
             player.ReplaceAmmo(player.ammo.value - 1);
-            Debug.LogError("Shoot");
+            var e = _contexts.game.CreateEntity();
+            e.AddAsset("bullet", false);
+            e.AddPosition(player.position.value+Constants.BULLET_OFFSET);
+            e.AddLinearSpeedMovement(1);
         }
     }
 

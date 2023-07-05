@@ -33,7 +33,8 @@ public class SpawnAsteroidSystem : IExecuteSystem
                 var e = _contexts.game.CreateEntity();
                 e.AddAsset(asteroidData.typeKey, false);
                 e.AddPosition(new Vector3(Constants.FARTHEST_X_POSITION, -1 * (asteroidData.height - 2), 0));
-                e.isLinearSpeedMovement = true;
+                e.AddLinearSpeedMovement(-1);
+                e.isAsteroid = true;
             }
             currentWave++;
         }
@@ -49,7 +50,7 @@ public class SpawnAsteroidSystem : IExecuteSystem
             var e = _contexts.game.CreateEntity();
             e.AddAsset("backWall", false);
             e.AddPosition(new Vector3(Constants.FARTHEST_X_POSITION, 0, 0));
-            e.isLinearSpeedMovement = true;
+            e.AddLinearSpeedMovement(-1);
             _lastTimeSystemUpdated = Time.time;
             currentWave++;
         }

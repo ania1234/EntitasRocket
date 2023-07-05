@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly LinearSpeedMovementComponent linearSpeedMovementComponent = new LinearSpeedMovementComponent();
+    public LinearSpeedMovementComponent linearSpeedMovement { get { return (LinearSpeedMovementComponent)GetComponent(GameComponentsLookup.LinearSpeedMovement); } }
+    public bool hasLinearSpeedMovement { get { return HasComponent(GameComponentsLookup.LinearSpeedMovement); } }
 
-    public bool isLinearSpeedMovement {
-        get { return HasComponent(GameComponentsLookup.LinearSpeedMovement); }
-        set {
-            if (value != isLinearSpeedMovement) {
-                var index = GameComponentsLookup.LinearSpeedMovement;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : linearSpeedMovementComponent;
+    public void AddLinearSpeedMovement(float newSpeedMultiplier) {
+        var index = GameComponentsLookup.LinearSpeedMovement;
+        var component = (LinearSpeedMovementComponent)CreateComponent(index, typeof(LinearSpeedMovementComponent));
+        component.speedMultiplier = newSpeedMultiplier;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceLinearSpeedMovement(float newSpeedMultiplier) {
+        var index = GameComponentsLookup.LinearSpeedMovement;
+        var component = (LinearSpeedMovementComponent)CreateComponent(index, typeof(LinearSpeedMovementComponent));
+        component.speedMultiplier = newSpeedMultiplier;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveLinearSpeedMovement() {
+        RemoveComponent(GameComponentsLookup.LinearSpeedMovement);
     }
 }
 

@@ -15,5 +15,4 @@ public class BackgroundUIListener : UIListener, IAnyGlobalSpeedListener
     {
         _background.speed = globalSpeed*0.5f;
     }
-
 }
