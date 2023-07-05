@@ -8,7 +8,7 @@ public class GreenAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callUpdateScore();
+                PersistentScript.instance.rocket.callUpdateScore();
                 Destroy(gameObject);
             }
         }

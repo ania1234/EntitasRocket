@@ -1,6 +1,7 @@
 using Entitas;
 using System.Collections.Generic;
 using UnityEngine;
+using static Constants;
 
 public class ProcessAxisInputSystem : ReactiveSystem<InputEntity>
 {
@@ -21,21 +22,21 @@ public class ProcessAxisInputSystem : ReactiveSystem<InputEntity>
 
             if (input.axisInput.value.y > 0)
             {
-                if (A < GameScript.MAX_A)
+                if (A < MAX_A)
                 {
                     A = A + Time.deltaTime;
                 }
             }
             if (input.axisInput.value.y<0)
             {
-                if (A > GameScript.MIN_A)
+                if (A > MIN_A)
                 {
                     A = A - Time.deltaTime;
                 }
             }
             if (input.axisInput.value.x<0)
             {
-                if (B > GameScript.MIN_B)
+                if (B > MIN_B)
                 {
                     B = B - Time.deltaTime;
                     C = -Time.time * Time.deltaTime + C;
@@ -43,7 +44,7 @@ public class ProcessAxisInputSystem : ReactiveSystem<InputEntity>
             }
             if (input.axisInput.value.x > 0)
             {
-                if (B < GameScript.MAX_B)
+                if (B < MAX_B)
                 {
                     B = B + Time.deltaTime;
                     C = Time.time * Time.deltaTime + C;

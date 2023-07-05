@@ -5,37 +5,27 @@ using System;
 
 public class BackWallScript : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
     void OnCollisionEnter2D(Collision2D coll)
     {
         switch (coll.gameObject.tag)
         {
             case Constants.Tags.Player:
 
-                if (PersistingScript.persistingScript.maxLevelNumber == PersistingScript.persistingScript.currentLevelNumber)
+                if (PersistentScript.instance.maxLevelNumber == PersistentScript.instance.currentLevelNumber)
                 {
-                    PersistingScript.persistingScript.maxLevelNumber = Mathf.Min(PersistingScript.persistingScript.maxLevelNumber + 1, 8);
+                    PersistentScript.instance.maxLevelNumber = Mathf.Min(PersistentScript.instance.maxLevelNumber + 1, 8);
                 }
-                PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1] =
-                Mathf.Max(PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1], PersistingScript.persistingScript.score.CalculateScore());
-                PersistingScript.persistingScript.Save();
+                PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber - 1] =
+                Mathf.Max(PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber - 1], PersistentScript.instance.score.CalculateScore());
+                PersistentScript.instance.Save();
                 SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
                 break;
             case Constants.Tags.Gold:
-                if (PersistingScript.persistingScript.currentLevelNumber == Constants.LevelsNumber)
+                if (PersistentScript.instance.currentLevelNumber == Constants.MAX_LEVELS)
                 {
-                    PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1] =
-                    Mathf.Max(PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber - 1], PersistingScript.persistingScript.score.CalculateScore());
-                    PersistingScript.persistingScript.Save();
+                    PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber - 1] =
+                    Mathf.Max(PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber - 1], PersistentScript.instance.score.CalculateScore());
+                    PersistentScript.instance.Save();
                     SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
                 }
                 else

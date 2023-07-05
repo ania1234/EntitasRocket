@@ -8,7 +8,7 @@ public class TurboAsteroidScript : OnCollisionScript{
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callIncreaseSpeed();
+                PersistentScript.instance.rocket.callIncreaseSpeed();
                 Destroy(gameObject);
             }
         }

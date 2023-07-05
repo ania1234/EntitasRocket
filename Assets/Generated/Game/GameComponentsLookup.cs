@@ -8,35 +8,62 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Asset = 0;
-    public const int Destroyed = 1;
-    public const int DestroyedListener = 2;
-    public const int Health = 3;
-    public const int Position = 4;
-    public const int PositionListener = 5;
-    public const int SineMovement = 6;
-    public const int View = 7;
+    public const int Ammo = 0;
+    public const int AmmoListener = 1;
+    public const int Asset = 2;
+    public const int Destroyed = 3;
+    public const int DestroyedListener = 4;
+    public const int Health = 5;
+    public const int HealthListener = 6;
+    public const int Id = 7;
+    public const int LinearSpeedMovement = 8;
+    public const int Position = 9;
+    public const int PositionListener = 10;
+    public const int Scale = 11;
+    public const int ScaleListener = 12;
+    public const int Score = 13;
+    public const int ScoreListener = 14;
+    public const int SineMovement = 15;
+    public const int View = 16;
 
-    public const int TotalComponents = 8;
+    public const int TotalComponents = 17;
 
     public static readonly string[] componentNames = {
+        "Ammo",
+        "AmmoListener",
         "Asset",
         "Destroyed",
         "DestroyedListener",
         "Health",
+        "HealthListener",
+        "Id",
+        "LinearSpeedMovement",
         "Position",
         "PositionListener",
+        "Scale",
+        "ScaleListener",
+        "Score",
+        "ScoreListener",
         "SineMovement",
         "View"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AmmoComponent),
+        typeof(AmmoListenerComponent),
         typeof(AssetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
         typeof(HealthComponent),
+        typeof(HealthListenerComponent),
+        typeof(IdComponent),
+        typeof(LinearSpeedMovementComponent),
         typeof(PositionComponent),
         typeof(PositionListenerComponent),
+        typeof(ScaleComponent),
+        typeof(ScaleListenerComponent),
+        typeof(ScoreComponent),
+        typeof(ScoreListenerComponent),
         typeof(SineMovementComponent),
         typeof(ViewComponent)
     };

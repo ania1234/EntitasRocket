@@ -1,18 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Entitas;
 
-public class LinearSpeedMovementComponent : MonoBehaviour
+public class LinearSpeedMovementComponent : IComponent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public float speed;
 }

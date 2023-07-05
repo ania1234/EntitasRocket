@@ -13,9 +13,11 @@ public class SpawnPlayerSystem : IInitializeSystem
     public void Initialize()
     {
         var e = _contexts.game.CreateEntity();
-        e.AddHealth(100);
-        e.AddAsset("Player", false);
+        e.AddHealth(Constants.MAX_HEALTH);
+        e.AddAsset(Constants.PLAYER_ID, false);
         e.AddPosition(new UnityEngine.Vector3(0, 0, 0));
         e.AddSineMovement(1, 1, 0, Time.time);
+        e.AddId(Constants.PLAYER_ID);
+        e.AddScore(0);
     }
 }

@@ -12,18 +12,13 @@ public class ScoreDisplayScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        MainScore.text = PersistingScript.persistingScript.score.score.ToString();
-        HealthBonus.text = "+ " + PersistingScript.persistingScript.score.multiplyLife.ToString() + " x " + PersistingScript.persistingScript.score.life.ToString();
-        ShootBonus.text = "+ " + PersistingScript.persistingScript.score.multiplyAmmo.ToString() + " x " + PersistingScript.persistingScript.score.ammo.ToString();
-        GoldBonus.text = "+ " + PersistingScript.persistingScript.score.multiplyGold.ToString() + " x " + PersistingScript.persistingScript.score.gold.ToString();
+        MainScore.text = PersistentScript.instance.score.score.ToString();
+        HealthBonus.text = "+ " + PersistentScript.instance.score.multiplyLife.ToString() + " x " + PersistentScript.instance.score.life.ToString();
+        ShootBonus.text = "+ " + PersistentScript.instance.score.multiplyAmmo.ToString() + " x " + PersistentScript.instance.score.ammo.ToString();
+        GoldBonus.text = "+ " + PersistentScript.instance.score.multiplyGold.ToString() + " x " + PersistentScript.instance.score.gold.ToString();
 
-        Summary.text = "= " + PersistingScript.persistingScript.score.CalculateScore().ToString();
+        Summary.text = "= " + PersistentScript.instance.score.CalculateScore().ToString();
 
-        HighScore.text = "( Highscore : " + PersistingScript.persistingScript.highScores[PersistingScript.persistingScript.currentLevelNumber-1].ToString() + " )";
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        HighScore.text = "( Highscore : " + PersistentScript.instance.highScores[PersistentScript.instance.currentLevelNumber-1].ToString() + " )";
 	}
 }

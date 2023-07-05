@@ -8,7 +8,7 @@ public class SmallerAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callDecreaseSize();
+                PersistentScript.instance.rocket.callDecreaseSize();
                 Destroy(gameObject);
             }
         }

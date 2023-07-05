@@ -6,34 +6,29 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 
-public class PersistingScript : MonoBehaviour {
+public class PersistentScript : MonoBehaviour {
 
     public int maxLevelNumber;
     public int currentLevelNumber;
     public List<int> highScores;
 
-    public static PersistingScript persistingScript;
+    public static PersistentScript instance;
 
     public GameScript rocket;
     public Score score;
-
-	// Use this for initialization
-	void Start () {
-        if (persistingScript == null)
-        {
-            score = new Score();
-            //DontDestroyOnLoad(gameObject);
-            persistingScript = this;
-        }
-        else if (persistingScript != this)
-        {
-            Destroy(gameObject);
-        }
-	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Awake () {
+        if (instance == null)
+        {
+            score = new Score();
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            GameObject.Destroy(this.gameObject);
+        }
 	}
 
     public void Save()
@@ -68,7 +63,7 @@ public class PersistingScript : MonoBehaviour {
                     maxLevelNumber = 1;
                     currentLevelNumber = 1;
                     highScores = new List<int>();
-                    for (int i = 0; i < Constants.LevelsNumber; i++)
+                    for (int i = 0; i < Constants.MAX_LEVELS; i++)
                     {
                         highScores.Add(0);
                     }
@@ -79,16 +74,16 @@ public class PersistingScript : MonoBehaviour {
                 maxLevelNumber = 1;
                 currentLevelNumber = 1;
                 highScores = new List<int>();
-                for (int i = 0; i < Constants.LevelsNumber; i++)
+                for (int i = 0; i < Constants.MAX_LEVELS; i++)
                 {
                     highScores.Add(0);
                 }
             }
 
-        if (highScores == null || highScores.Count != Constants.LevelsNumber)
+        if (highScores == null || highScores.Count != Constants.MAX_LEVELS)
         {
             highScores = new List<int>();
-            for (int i = 0; i < Constants.LevelsNumber; i++)
+            for (int i = 0; i < Constants.MAX_LEVELS; i++)
             {
                 highScores.Add(0);
             }

@@ -22,7 +22,7 @@ public class Score {
         gold = 0;
         score = 0;
         life = 3;
-        if (PersistingScript.persistingScript.currentLevelNumber < Constants.FirstLevelWithShots)
+        if (PersistentScript.instance.currentLevelNumber < Constants.FirstLevelWithShots)
         {
             ammo = 0;
         }

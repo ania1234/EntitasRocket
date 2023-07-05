@@ -4,7 +4,6 @@ using UnityEngine;
 public class GatherAxisInputSystem : IExecuteSystem
 {
     private Contexts _contexts;
-    readonly IGroup<GameEntity> _healthComponents;
 
     public GatherAxisInputSystem(Contexts contexts)
     {

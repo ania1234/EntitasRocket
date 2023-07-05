@@ -1,18 +1,22 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using Entitas;
+using System.Collections.Generic;
 
-//public class ProcessAxisInputSystem : MonoBehaviour
-//{
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-        
-//    }
+public class DestroyShootingInputSystem : ICleanupSystem
+{
 
-//    // Update is called once per frame
-//    void Update()
-//    {
-        
-//    }
-//}
+    readonly IGroup<InputEntity> _group;
+    readonly List<InputEntity> _buffer = new List<InputEntity>();
+
+    public DestroyShootingInputSystem(Contexts contexts)
+    {
+        _group = contexts.input.GetGroup(InputMatcher.ShootInput);
+    }
+
+    public void Cleanup()
+    {
+        foreach (var e in _group.GetEntities(_buffer))
+        {
+            e.Destroy();
+        }
+    }
+}

@@ -9,7 +9,7 @@ public class BiggerAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
 
-                PersistingScript.persistingScript.rocket.callIncreaseSize();
+                PersistentScript.instance.rocket.callIncreaseSize();
                 Destroy(gameObject);
         }
         if (coll.gameObject.tag == "Bullet")

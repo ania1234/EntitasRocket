@@ -8,7 +8,7 @@ public class RedAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callDecreaseLife();
+                PersistentScript.instance.rocket.callDecreaseLife();
                 Destroy(gameObject);
             }
         }

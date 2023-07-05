@@ -9,7 +9,7 @@ public class ShootAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callIncreaseAmmo();
+                PersistentScript.instance.rocket.callIncreaseAmmo();
             }
         }
         Destroy(gameObject);

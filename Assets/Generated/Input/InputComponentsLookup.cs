@@ -9,14 +9,23 @@
 public static class InputComponentsLookup {
 
     public const int AxisInput = 0;
+    public const int ScaleInput = 1;
+    public const int ShootInput = 2;
+    public const int SpeedInput = 3;
 
-    public const int TotalComponents = 1;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-        "AxisInput"
+        "AxisInput",
+        "ScaleInput",
+        "ShootInput",
+        "SpeedInput"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(AxisInputComponent)
+        typeof(AxisInputComponent),
+        typeof(ScaleInputComponent),
+        typeof(ShootInputComponent),
+        typeof(SpeedInputComponent)
     };
 }

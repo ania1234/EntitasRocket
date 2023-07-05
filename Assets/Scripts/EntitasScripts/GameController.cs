@@ -6,14 +6,25 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private RootSystem _rootSystem;
+    [SerializeField]
+    private List<UIListener> _uiListeners;
 
     private void Start()
     {
+        LevelsContainer.LoadLevel(1);
         var contexts = Contexts.sharedInstance;
 
         _rootSystem = new RootSystem(contexts);
         _rootSystem.Initialize();
+        SubscribeUIListeners();
+    }
 
+    private void SubscribeUIListeners()
+    {
+        foreach (var listener in _uiListeners)
+        {
+            listener.Subscribe();
+        }
     }
 
     private void Update()

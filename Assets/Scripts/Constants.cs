@@ -7,24 +7,28 @@ public class Constants : MonoBehaviour {
 
     public static string persistentFileName = "levelInfo.dat";
     public const int VersionNumber = 1;
-    public const int LevelsNumber = 8;
     public const int FirstLevelWithShots = 3;
 
+    public const int MAX_LEVELS = 8;
+    public const float MAX_A = 3.0f;
+    public const float MIN_A = -3.0f;
+    public const float MAX_B = 2.0f;
+    public const float MIN_B = 0.2f;
+    public const float MAX_SPEED = 15.0f;
+    public const float MIN_SPEED = 1.0f;
+    public const int MAX_HEALTH = 3;
+    public const int MIN_HEALTH = 0;
+    public const float MAX_SIZE = 3.0f;
+    public const float MIN_SIZE = 0.5f;
+    public const int MAX_AMMO = 3;
+    public const int MIN_AMMO = 0;
+    public const float FARTHEST_X_POSITION = 14.0f;
 
-    public Rigidbody2D redAsteroid;
-    public Rigidbody2D greenAsteroid;
-    public Rigidbody2D goldenAsteroid;
-    public Rigidbody2D turboAsteroid;
-    public Rigidbody2D healAsteroid;
-    public Rigidbody2D instantDeathAsteroid;
-    public Rigidbody2D shootAsteroid;
-    public Rigidbody2D bigAsteroid;
-    public Rigidbody2D smallAsteroid;
-    public Rigidbody2D bullet;
+    public const string PLAYER_ID = "Player";
 
     public static Constants constants;
 
-    public Dictionary<char, Tuple<Rigidbody2D, bool>> AsteroidMapping = new Dictionary<char, Tuple<Rigidbody2D, bool>>();
+    public Dictionary<char, AsteroidMappingData> AsteroidMapping = new Dictionary<char, AsteroidMappingData>();
 
     public static Dictionary<int, Tuple<Rigidbody2D, string>> ExplanationContent = new Dictionary<int, Tuple<Rigidbody2D, string>>();
 
@@ -36,22 +40,84 @@ public class Constants : MonoBehaviour {
     void Start()
     {
         constants = this;
-        AsteroidMapping.Add(asteroidMarks.greenAsteroid, new Tuple<Rigidbody2D, bool>(greenAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.greenAsteroidMobile, new Tuple<Rigidbody2D, bool>(greenAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.redAsteroid, new Tuple<Rigidbody2D, bool>(redAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.redAsteroidMobile, new Tuple<Rigidbody2D, bool>(redAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.goldenAsteroid, new Tuple<Rigidbody2D, bool>(goldenAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.goldenAsteroidMobile, new Tuple<Rigidbody2D, bool>(goldenAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.turboAsteroid, new Tuple<Rigidbody2D, bool>(turboAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.turboAsteroidMobile, new Tuple<Rigidbody2D, bool>(turboAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.healAsteroid, new Tuple<Rigidbody2D, bool>(healAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.healAsteroidMobile, new Tuple<Rigidbody2D, bool>(healAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.shootAsteroid, new Tuple<Rigidbody2D, bool>(shootAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.shootAsteroidMobile, new Tuple<Rigidbody2D, bool>(shootAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.bigAsteroid, new Tuple<Rigidbody2D, bool>(bigAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.bigAsteroidMobile, new Tuple<Rigidbody2D, bool>(bigAsteroid, true));
-        AsteroidMapping.Add(asteroidMarks.smallAsteroid, new Tuple<Rigidbody2D, bool>(smallAsteroid, false));
-        AsteroidMapping.Add(asteroidMarks.smallAsteroidMobile, new Tuple<Rigidbody2D, bool>(smallAsteroid, true));
+        AsteroidMapping.Add(asteroidMarks.greenAsteroid, new AsteroidMappingData(){
+            assetName = "greenAsteroid", shouldAddSineMovement=false
+        });
+        AsteroidMapping.Add(asteroidMarks.greenAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "greenAsteroid",
+            shouldAddSineMovement = false
+        });
+        AsteroidMapping.Add(asteroidMarks.redAsteroid, new AsteroidMappingData()
+        {
+            assetName = "redAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.redAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "redAsteroid",
+            shouldAddSineMovement = false
+        });
+        AsteroidMapping.Add(asteroidMarks.goldenAsteroid, new AsteroidMappingData()
+        {
+            assetName = "goldenAsteroid",
+            shouldAddSineMovement = false
+        });
+        AsteroidMapping.Add(asteroidMarks.goldenAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "goldenAsteroid",
+            shouldAddSineMovement = false
+        });
+        AsteroidMapping.Add(asteroidMarks.turboAsteroid, new AsteroidMappingData()
+        {
+            assetName = "turboAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.turboAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "turboAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.healAsteroid, new AsteroidMappingData()
+        {
+            assetName = "healAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.healAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "healAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.shootAsteroid, new AsteroidMappingData()
+        {
+            assetName = "shootAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.shootAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "shootAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.bigAsteroid, new AsteroidMappingData()
+        {
+            assetName = "bigAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.bigAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "bigAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.smallAsteroid, new AsteroidMappingData()
+        {
+            assetName = "smallAsteroid",
+            shouldAddSineMovement = false
+        }); ;
+        AsteroidMapping.Add(asteroidMarks.smallAsteroidMobile, new AsteroidMappingData()
+        {
+            assetName = "smallAsteroid",
+            shouldAddSineMovement = false
+        }); ;
     }
 
     public static class SceneNames
@@ -94,6 +160,12 @@ public class Constants : MonoBehaviour {
         public static char smallAsteroid = 'm';
         public static char smallAsteroidMobile = 'M';
 
+    }
+
+    public class AsteroidMappingData
+    {
+        public string assetName;
+        public bool shouldAddSineMovement;
     }
 
 }

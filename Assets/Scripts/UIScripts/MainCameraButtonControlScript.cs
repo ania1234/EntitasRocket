@@ -7,7 +7,7 @@ public class MainCameraButtonControlScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        for (int i = 1; i <= PersistingScript.persistingScript.maxLevelNumber; i++)
+        for (int i = 1; i <= PersistentScript.instance.maxLevelNumber; i++)
         {
             GameObject.Find("Button" + i.ToString()).GetComponent<Button>().interactable = true;
         }
@@ -24,7 +24,7 @@ public class MainCameraButtonControlScript : MonoBehaviour {
 
     public void StartGame(int level)
     {
-        PersistingScript.persistingScript.currentLevelNumber = level;
+        PersistentScript.instance.currentLevelNumber = level;
         SceneManager.LoadScene(Constants.SceneNames.MiddleScene, LoadSceneMode.Single);
     }
 }

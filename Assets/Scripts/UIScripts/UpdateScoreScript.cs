@@ -11,26 +11,17 @@ public class UpdateScoreScript : MonoBehaviour {
     Stack<Image> healthSpirits = new Stack<Image>();
     Stack<Image> shotSpirits = new Stack<Image>();
     
-	// Use this for initialization
-	void Start () {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public void InitializeDisplay()
     {
-        scoreText.text = "S c o r e : " + PersistingScript.persistingScript.score.score.ToString();
-        for (int i = 0; i < PersistingScript.persistingScript.score.life; i++)
+        scoreText.text = "S c o r e : " + PersistentScript.instance.score.score.ToString();
+        for (int i = 0; i < PersistentScript.instance.score.life; i++)
         {
             Image image = (Image)Instantiate(health, new Vector3(-350 + i * 40, 210, 0), new Quaternion(0, 0, 0, 0));
             image.transform.SetParent(gameObject.transform, false);
             healthSpirits.Push(image);
         }
-        for (int i = 0; i < PersistingScript.persistingScript.score.ammo; i++)
+        for (int i = 0; i < PersistentScript.instance.score.ammo; i++)
         {
             Image image = (Image)Instantiate(shots, new Vector3(-186 + i * 43, 207, 0), new Quaternion(0, 0, 0, 0));
             image.transform.SetParent(gameObject.transform, false);
@@ -40,21 +31,21 @@ public class UpdateScoreScript : MonoBehaviour {
 
     public void UpdateScore()
     {
-        scoreText.text = "S c o r e : " + PersistingScript.persistingScript.score.score.ToString();
+        scoreText.text = "S c o r e : " + PersistentScript.instance.score.score.ToString();
     }
 
 
     internal void UpdateAmmo()
     {
-        if (shotSpirits.Count > PersistingScript.persistingScript.score.ammo)
+        if (shotSpirits.Count > PersistentScript.instance.score.ammo)
         {
             Image image = shotSpirits.Pop();
             Destroy(image.gameObject);
         }
 
-        if (shotSpirits.Count < PersistingScript.persistingScript.score.ammo)
+        if (shotSpirits.Count < PersistentScript.instance.score.ammo)
         {
-            Image image = (Image)Instantiate(shots, new Vector3(-186 + (PersistingScript.persistingScript.score.ammo-1) * 43, 207, 0), new Quaternion(0, 0, 0, 0));
+            Image image = (Image)Instantiate(shots, new Vector3(-186 + (PersistentScript.instance.score.ammo-1) * 43, 207, 0), new Quaternion(0, 0, 0, 0));
             image.transform.SetParent(gameObject.transform, false);
             shotSpirits.Push(image);
         }
@@ -62,16 +53,16 @@ public class UpdateScoreScript : MonoBehaviour {
 
     internal void UpdateLife()
     {
-        if (healthSpirits.Count > PersistingScript.persistingScript.score.life)
+        if (healthSpirits.Count > PersistentScript.instance.score.life)
         {
             Image image = healthSpirits.Pop();
             print(image);
             Destroy(image.gameObject);
         }
 
-        if (healthSpirits.Count < PersistingScript.persistingScript.score.life)
+        if (healthSpirits.Count < PersistentScript.instance.score.life)
         {
-            Image image = (Image)Instantiate(health, new Vector3(-350 + (PersistingScript.persistingScript.score.life-1) * 40, 207, 0), new Quaternion(0, 0, 0, 0));
+            Image image = (Image)Instantiate(health, new Vector3(-350 + (PersistentScript.instance.score.life-1) * 40, 207, 0), new Quaternion(0, 0, 0, 0));
             image.transform.SetParent(gameObject.transform, false);
             healthSpirits.Push(image);
         }

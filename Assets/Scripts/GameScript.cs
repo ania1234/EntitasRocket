@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using static Constants;
 
 
 public class GameScript : MonoBehaviour {
@@ -28,40 +29,24 @@ public class GameScript : MonoBehaviour {
     float size = 1.0f;
     public float speed;
 
-    public const float MAX_A = 3.0f;
-    public const float MIN_A = -3.0f;
-    public const float MAX_B = 2.0f;
-    public const float MIN_B = 0.2f;
-    public const float MAX_SPEED = 15.0f;
-    public const float MIN_SPEED = 1.0f;
-    public const float MAX_HEALTH = 3.0f;
-    public const float MIN_HEALTH = 0.0f;
-    public const float MAX_SIZE = 3.0f;
-    public const float MIN_SIZE = 0.5f;
-    public const float MAX_AMMO = 3.0f;
-    public const float MIN_AMMO = 0.5f;
     private Touch touch;
-
-    float duration = 0;
-    float sineTimeToSubstract = 0;
 
     int currentWave = 0;
 	// Use this for initialization
 	void Start () {
         Background.gameObject.GetComponent<Animator>().enabled = true;
         Background.gameObject.GetComponent<Animator>().speed = speed;
-        PersistingScript.persistingScript.SetRocket(this);
-        PersistingScript.persistingScript.score.ResetScore();
+        PersistentScript.instance.SetRocket(this);
+        PersistentScript.instance.score.ResetScore();
         UI.InitializeDisplay();
-        sineTimeToSubstract = Time.time;
-        LevelsContainer.LoadLevel(PersistingScript.persistingScript.currentLevelNumber);
+        LevelsContainer.LoadLevel(PersistentScript.instance.currentLevelNumber);
 	}
 
     IEnumerator AsteroidSpawn()
     {  
         while (currentWave<LevelsContainer.width)
         {
-                LevelsContainer.getAsteroids(currentWave);
+                LevelsContainer.GetAsteroids(currentWave);
                 currentWave++;
                 yield return new WaitForSeconds(1/speed);
         }
@@ -227,7 +212,7 @@ public class GameScript : MonoBehaviour {
         {
             hit = true;
             DecreaseLife();
-            if (PersistingScript.persistingScript.score.life == MIN_HEALTH)
+            if (PersistentScript.instance.score.life == MIN_HEALTH)
             {
                 SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
             }
@@ -241,7 +226,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator UpdateScore()
     {
-        PersistingScript.persistingScript.score.score++;
+        PersistentScript.instance.score.score++;
         UI.UpdateScore();
         yield return null;
     }
@@ -281,9 +266,9 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseAmmo()
     {
-        if (PersistingScript.persistingScript.score.ammo < MAX_AMMO)
+        if (PersistentScript.instance.score.ammo < MAX_AMMO)
         {
-            PersistingScript.persistingScript.score.ammo++;
+            PersistentScript.instance.score.ammo++;
             UI.UpdateAmmo();
         }
         yield return null;
@@ -291,7 +276,7 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator DecreaseAmmo()
     {
-        PersistingScript.persistingScript.score.ammo--;
+        PersistentScript.instance.score.ammo--;
         UI.UpdateAmmo();
         yield return null;
     }
@@ -318,11 +303,11 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator Shoot()
     {
-        if (!shooting && PersistingScript.persistingScript.score.ammo > MIN_AMMO)
+        if (!shooting && PersistentScript.instance.score.ammo > MIN_AMMO)
         {
             shooting = true;
-            Rigidbody2D shootAsteroid = (Rigidbody2D)Instantiate(Constants.constants.bullet, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0)));
-            shootAsteroid.velocity = new Vector2(1.0f * speed, 0);
+            //Rigidbody2D shootAsteroid = (Rigidbody2D)Instantiate(Constants.constants.bullet, new Vector3(gameObject.transform.position.x + 2, gameObject.transform.position.y), Quaternion.Euler(new Vector3(0, 0, 0)));
+            //shootAsteroid.velocity = new Vector2(1.0f * speed, 0);
             StartCoroutine(DecreaseAmmo());
             yield return new WaitForSeconds(0.25f);
             shooting = false;
@@ -333,9 +318,9 @@ public class GameScript : MonoBehaviour {
 
     internal IEnumerator IncreaseLife()
     {
-        if (PersistingScript.persistingScript.score.life < MAX_HEALTH)
+        if (PersistentScript.instance.score.life < MAX_HEALTH)
         {
-            PersistingScript.persistingScript.score.life++;
+            PersistentScript.instance.score.life++;
         }
         UI.UpdateLife();
 
@@ -347,12 +332,12 @@ public class GameScript : MonoBehaviour {
         if (!hit)
         {
             hit = true;
-            if (PersistingScript.persistingScript.score.life > MIN_HEALTH)
+            if (PersistentScript.instance.score.life > MIN_HEALTH)
             {
-                PersistingScript.persistingScript.score.life--;
+                PersistentScript.instance.score.life--;
             }
             UI.UpdateLife();
-            if (PersistingScript.persistingScript.score.life == MIN_HEALTH)
+            if (PersistentScript.instance.score.life == MIN_HEALTH)
             {
                 SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
             }
@@ -422,7 +407,7 @@ public class GameScript : MonoBehaviour {
     {
         if (tag == Constants.Tags.Gold)
         {
-            PersistingScript.persistingScript.score.gold++;
+            PersistentScript.instance.score.gold++;
         }
     }
 }

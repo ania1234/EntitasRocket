@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entitas;
 using UnityEngine;
 
-public class GatherShootingInputSystem : MonoBehaviour
+public class GatherShootingInputSystem : IExecuteSystem
 {
-    // Start is called before the first frame update
-    void Start()
+    private Contexts _contexts;
+
+    public GatherShootingInputSystem(Contexts contexts)
     {
-        
+        _contexts = contexts;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Execute()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _contexts.input.CreateEntity().isShootInput = true;
+        }
     }
 }

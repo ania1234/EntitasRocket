@@ -8,7 +8,7 @@ public class HealAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callIncreaseLife();
+                PersistentScript.instance.rocket.callIncreaseLife();
                 Destroy(gameObject);
             }
         }

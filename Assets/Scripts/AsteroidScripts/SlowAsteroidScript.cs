@@ -8,7 +8,7 @@ public class SlowAsteroidScript : OnCollisionScript {
         if (coll.gameObject.tag == "Player")
         {
             {
-                PersistingScript.persistingScript.rocket.callDecreaseSpeed();
+                PersistentScript.instance.rocket.callDecreaseSpeed();
                 Destroy(gameObject);
             }
         }
