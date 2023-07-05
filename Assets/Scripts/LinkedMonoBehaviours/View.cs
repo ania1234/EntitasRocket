@@ -18,6 +18,10 @@ public class View : MonoBehaviour, IView, IPositionListener, IDestroyedListener,
         transform.localPosition = new Vector3(pos.x, pos.y);
     }
 
+    public void Unlink()
+    {
+    }
+
     public virtual void OnPosition(GameEntity entity, Vector3 value)
     {
         transform.localPosition = new Vector3(value.x, value.y);

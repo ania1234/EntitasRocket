@@ -10,30 +10,34 @@ public static class GameComponentsLookup {
 
     public const int Ammo = 0;
     public const int AmmoListener = 1;
-    public const int Asset = 2;
-    public const int Destroyed = 3;
-    public const int DestroyedListener = 4;
-    public const int Health = 5;
-    public const int HealthListener = 6;
-    public const int Id = 7;
-    public const int LinearSpeedMovement = 8;
-    public const int Position = 9;
-    public const int PositionListener = 10;
-    public const int Scale = 11;
-    public const int ScaleListener = 12;
-    public const int Score = 13;
-    public const int ScoreListener = 14;
-    public const int SineMovement = 15;
-    public const int View = 16;
+    public const int AnyGlobalSpeedListener = 2;
+    public const int Asset = 3;
+    public const int Destroyed = 4;
+    public const int DestroyedListener = 5;
+    public const int GlobalSpeed = 6;
+    public const int Health = 7;
+    public const int HealthListener = 8;
+    public const int Id = 9;
+    public const int LinearSpeedMovement = 10;
+    public const int Position = 11;
+    public const int PositionListener = 12;
+    public const int Scale = 13;
+    public const int ScaleListener = 14;
+    public const int Score = 15;
+    public const int ScoreListener = 16;
+    public const int SineMovement = 17;
+    public const int View = 18;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "Ammo",
         "AmmoListener",
+        "AnyGlobalSpeedListener",
         "Asset",
         "Destroyed",
         "DestroyedListener",
+        "GlobalSpeed",
         "Health",
         "HealthListener",
         "Id",
@@ -51,9 +55,11 @@ public static class GameComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(AmmoComponent),
         typeof(AmmoListenerComponent),
+        typeof(AnyGlobalSpeedListenerComponent),
         typeof(AssetComponent),
         typeof(DestroyedComponent),
         typeof(DestroyedListenerComponent),
+        typeof(GlobalSpeedComponent),
         typeof(HealthComponent),
         typeof(HealthListenerComponent),
         typeof(IdComponent),

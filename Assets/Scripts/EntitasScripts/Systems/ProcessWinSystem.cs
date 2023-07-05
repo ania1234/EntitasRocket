@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class ProcessWinSystem : ReactiveSystem<GameStateEntity>
 {
     private Contexts _contexts;
-    readonly List<Entity> _buffer = new List<Entity>();
     public ProcessWinSystem(Contexts contexts):base(contexts.gameState)
     {
         _contexts = contexts;
@@ -21,7 +20,7 @@ public class ProcessWinSystem : ReactiveSystem<GameStateEntity>
         var allGameEntities = _contexts.game.GetEntities();
         foreach (var e in allGameEntities)
         {
-            e.Destroy();
+            e.isDestroyed = true;
         }
         var allInputEntities = _contexts.input.GetEntities();
         foreach (var e in allInputEntities)

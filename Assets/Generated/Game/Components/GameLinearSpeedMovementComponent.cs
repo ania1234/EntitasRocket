@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public LinearSpeedMovementComponent linearSpeedMovement { get { return (LinearSpeedMovementComponent)GetComponent(GameComponentsLookup.LinearSpeedMovement); } }
-    public bool hasLinearSpeedMovement { get { return HasComponent(GameComponentsLookup.LinearSpeedMovement); } }
+    static readonly LinearSpeedMovementComponent linearSpeedMovementComponent = new LinearSpeedMovementComponent();
 
-    public void AddLinearSpeedMovement(float newSpeed) {
-        var index = GameComponentsLookup.LinearSpeedMovement;
-        var component = (LinearSpeedMovementComponent)CreateComponent(index, typeof(LinearSpeedMovementComponent));
-        component.speed = newSpeed;
-        AddComponent(index, component);
-    }
+    public bool isLinearSpeedMovement {
+        get { return HasComponent(GameComponentsLookup.LinearSpeedMovement); }
+        set {
+            if (value != isLinearSpeedMovement) {
+                var index = GameComponentsLookup.LinearSpeedMovement;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : linearSpeedMovementComponent;
 
-    public void ReplaceLinearSpeedMovement(float newSpeed) {
-        var index = GameComponentsLookup.LinearSpeedMovement;
-        var component = (LinearSpeedMovementComponent)CreateComponent(index, typeof(LinearSpeedMovementComponent));
-        component.speed = newSpeed;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveLinearSpeedMovement() {
-        RemoveComponent(GameComponentsLookup.LinearSpeedMovement);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 

@@ -5,7 +5,6 @@ public class SpawnAsteroidSystem : IExecuteSystem
 {
     readonly Contexts _contexts;
     int currentWave = 0;
-    float speed = 2;
     private float _lastTimeSystemUpdated = 0;
     public SpawnAsteroidSystem(Contexts contexts)
     {
@@ -15,7 +14,12 @@ public class SpawnAsteroidSystem : IExecuteSystem
 
     public void Execute()
     {
-        if(Time.time - _lastTimeSystemUpdated < 1 / speed)
+        if (!_contexts.game.hasGlobalSpeed)
+        {
+            return;
+        }
+
+        if(Time.time - _lastTimeSystemUpdated < 1 / _contexts.game.globalSpeed.globalSpeed)
         {
             return;
         }
@@ -29,7 +33,7 @@ public class SpawnAsteroidSystem : IExecuteSystem
                 var e = _contexts.game.CreateEntity();
                 e.AddAsset(asteroidData.typeKey, false);
                 e.AddPosition(new Vector3(Constants.FARTHEST_X_POSITION, -1 * (asteroidData.height - 2), 0));
-                e.AddLinearSpeedMovement(-speed);
+                e.isLinearSpeedMovement = true;
             }
             currentWave++;
         }
@@ -45,7 +49,7 @@ public class SpawnAsteroidSystem : IExecuteSystem
             var e = _contexts.game.CreateEntity();
             e.AddAsset("backWall", false);
             e.AddPosition(new Vector3(Constants.FARTHEST_X_POSITION, 0, 0));
-            e.AddLinearSpeedMovement(-speed);
+            e.isLinearSpeedMovement = true;
             _lastTimeSystemUpdated = Time.time;
             currentWave++;
         }

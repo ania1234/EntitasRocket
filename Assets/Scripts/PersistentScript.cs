@@ -39,12 +39,12 @@ public class PersistentScript : MonoBehaviour {
 
     internal void LoadLooseScene()
     {
-        SceneManager.LoadScene(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(Constants.SceneNames.LooseScene, LoadSceneMode.Single);
     }
 
     internal void LoadWinScene()
     {
-        SceneManager.LoadScene(Constants.SceneNames.WinScene, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(Constants.SceneNames.WinScene, LoadSceneMode.Single);
     }
 
     internal void NoteHighScore()

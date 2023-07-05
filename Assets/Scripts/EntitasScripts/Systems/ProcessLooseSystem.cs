@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class ProcessLooseSystem : ReactiveSystem<GameStateEntity>
 {
     private Contexts _contexts;
+    readonly List<IDestroyedListener> _listenerBuffer = new List<IDestroyedListener>();
     public ProcessLooseSystem(Contexts contexts) : base(contexts.gameState)
     {
         _contexts = contexts;
@@ -13,7 +14,7 @@ public class ProcessLooseSystem : ReactiveSystem<GameStateEntity>
         var allGameEntities = _contexts.game.GetEntities();
         foreach (var e in allGameEntities)
         {
-            e.Destroy();
+            e.isDestroyed = true;
         }
         var allInputEntities = _contexts.input.GetEntities();
         foreach (var e in allInputEntities)

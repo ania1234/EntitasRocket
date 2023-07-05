@@ -5,21 +5,17 @@ using UnityEngine;
 
 public class ProcessSpeedInputSystem : ReactiveSystem<InputEntity>
 {
-    private IGroup<GameEntity> _linearMovements;
-
+    private Contexts _contexts;
     public ProcessSpeedInputSystem(Contexts contexts) : base(contexts.input)
-        {
-        _linearMovements = contexts.game.GetGroup(GameMatcher.LinearSpeedMovement);
+    {
+        _contexts = contexts;
     }
     protected override void Execute(List<InputEntity> entities)
     {
         //more than one speed change in frame possible
         foreach (var entity in entities)
         {
-            foreach (var linearMovement in _linearMovements)
-            {
-                linearMovement.ReplaceLinearSpeedMovement(linearMovement.linearSpeedMovement.speed+entity.speedInput.speedChange);
-            }
+            _contexts.game.ReplaceGlobalSpeed(_contexts.game.globalSpeed.globalSpeed + entity.speedInput.speedChange);
         }
     }
 

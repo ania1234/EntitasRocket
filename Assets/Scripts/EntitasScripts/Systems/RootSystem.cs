@@ -3,6 +3,7 @@ public class RootSystem : Feature
     public RootSystem(Contexts contexts)
     {
         //spawn entities
+        Add(new SetGlobalsSystem(contexts));
         Add(new SpawnPlayerSystem(contexts));
         Add(new SpawnAsteroidSystem(contexts));
         
@@ -24,17 +25,15 @@ public class RootSystem : Feature
         Add(new ProcessSpeedInputSystem(contexts));
         Add(new ProcessScaleInputSystem(contexts));
 
+        //process win-loose conditions
+        Add(new ProcessWinLooseSystem(contexts));
         //process events (generated)
         Add(new GameEventSystems(contexts));
-
         //destroy
         Add(new DestroyEntitesSytem(contexts));
         Add(new DestroyAxisInputSystem(contexts));
         Add(new DestroySpeedInputSystem(contexts));
         Add(new DestroyScaleInputSystem(contexts));
         Add(new DestroyShootingInputSystem(contexts));
-
-        //process win-loose conditions
-        Add(new ProcessWinLooseSystem(contexts));
     }
 }
